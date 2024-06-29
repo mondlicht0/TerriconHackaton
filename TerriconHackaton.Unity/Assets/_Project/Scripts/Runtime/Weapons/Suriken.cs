@@ -1,15 +1,12 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Weapons
 {
     [CreateAssetMenu(fileName = "Suriken", menuName = "Weapons/New Suriken", order = 0)]
     public class Suriken : Weapon
     {
+        public float Speed;
         private Rigidbody _rigidbody;
-        public Vector3 SpawnPoint;
-        public Vector3 SpawnRotation;
-
         private float _lastShootTime;
 
         public override void Spawn(Transform parent)
@@ -26,14 +23,14 @@ namespace Project.Weapons
             }
         }
 
-        protected override void Attack(bool useSpecial)
+        protected override void Attack(bool useSpecial, Vector3 shootDirection)
         {
             GameObject shuriken = Instantiate(ModelPrefab, SpawnedModel.transform.position, SpawnedModel.transform.rotation);
             
             if (!shuriken.TryGetComponent(out Rigidbody shurikenRb)) return;
             
             shurikenRb.useGravity = false;
-            shurikenRb.velocity = SpawnedModel.transform.forward * 15;
+            shurikenRb.velocity = shootDirection * Speed;
 
             if (useSpecial)
             {
@@ -42,11 +39,11 @@ namespace Project.Weapons
 
                 GameObject leftShuriken = Instantiate(ModelPrefab, SpawnedModel.transform.position, SpawnedModel.transform.rotation);
                 Rigidbody leftRb = leftShuriken.GetComponent<Rigidbody>();
-                leftRb.velocity = leftDirection * 15;
+                leftRb.velocity = leftDirection * Speed;
 
                 GameObject rightShuriken = Instantiate(ModelPrefab, SpawnedModel.transform.position, SpawnedModel.transform.rotation);
                 Rigidbody rightRb = rightShuriken.GetComponent<Rigidbody>();
-                rightRb.velocity = rightDirection * 15;
+                rightRb.velocity = rightDirection * Speed;
             }
         }
     }

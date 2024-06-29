@@ -15,5 +15,6 @@ MonoBehaviour:
   ModelPrefab: {fileID: 320481837721349666, guid: ffe398fddd4f14b4aaef574aa94938db,
     type: 3}
   FireRate: 0.2
+  Speed: 50
   SpawnPoint: {x: 0.44, y: -0.44, z: 1.4}
   SpawnRotation: {x: 0, y: 0, z: 0}

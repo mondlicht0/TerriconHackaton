@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4afd110fd634e128fd002e1d1dad8d0, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  ModelPrefab: {fileID: 3736484241920742566, guid: bbb43c234bebcb9499aa7b0afe7fdeea,
+    type: 3}
+  FireRate: 1
+  SpawnPoint: {x: 0.074, y: 0.128, z: 0.182}
+  SpawnRotation: {x: 0, y: 0, z: -25.011}
+  _arrowPrefab: {fileID: 653212950635690402, guid: d153d726e0995dc43ab9361f5776f6e9,
+    type: 3}
+  _shootForce: 50
+  _spawnOffset: {x: 0.5, y: -0.3, z: 1.2}

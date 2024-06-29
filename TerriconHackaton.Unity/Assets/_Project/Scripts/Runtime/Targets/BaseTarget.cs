@@ -4,12 +4,13 @@ using Random = UnityEngine.Random;
 
 namespace Project.Targets
 {
-    public class BaseTarget : MonoBehaviour
+    public class BaseTarget : MonoBehaviour, IDamagable
     {
         [Header("Movement Type")] 
         [SerializeField] private MovementType _movementType;
 
-        [Header("General")]
+        [Header("General")] 
+        [SerializeField] private int _value = 5;
         [SerializeField] private float _speed = 2.0f;
 
         [Header("Horizontal Movement")] 
@@ -26,18 +27,33 @@ namespace Project.Targets
     
         private float _timer;
         private Vector2 _direction;
-    
         private bool _movingRight = true;
+        private bool _isTeleporting;
+
+        public event Action<int> OnTargetHit; 
 
         private void Start()
         {
             _timer = _changeDirectionTime;
-            StartTeleport();
         }
 
         private void Update()
         {
-            //RandomMovement();
+            switch (_movementType)
+            {
+                case MovementType.Default:
+                    HorizontalMovement();
+                    break;
+                case MovementType.Random:
+                    RandomMovement();
+                    break;
+                case MovementType.Teleport:
+                    StartTeleport();
+                    break;
+                default:
+                    HorizontalMovement();
+                    break;
+            }
         }
 
         private void HorizontalMovement()
@@ -80,7 +96,11 @@ namespace Project.Targets
 
         private void StartTeleport()
         {
-            InvokeRepeating("Teleport", _teleportInterval, _teleportInterval);
+            if (!_isTeleporting)
+            {
+                _isTeleporting = true;
+                InvokeRepeating("Teleport", _teleportInterval, _teleportInterval);
+            }
         }
 
         private void Teleport()
@@ -102,6 +122,17 @@ namespace Project.Targets
             {
                 _direction = Vector2.left;
             }
+        }
+
+        public void GetDamage()
+        {
+            Die();
+            OnTargetHit?.Invoke(_value);
+        }
+
+        public void Die()
+        {
+            Debug.Log("Popal");
         }
     }
 }

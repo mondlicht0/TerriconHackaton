@@ -6,6 +6,8 @@ namespace Project.Weapons
     {
         public GameObject ModelPrefab;
         public float FireRate;
+        public Vector3 SpawnPoint;
+        public Vector3 SpawnRotation;
         
         protected GameObject SpawnedModel;
         protected float LastShootTime;
@@ -20,7 +22,7 @@ namespace Project.Weapons
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                 Vector3 shootDirection = ray.origin - SpawnedModel.transform.forward;
                 shootDirection.Normalize();
-                Attack(useSpecial);
+                Attack(useSpecial, ray.direction);
             }
         }
 
@@ -32,6 +34,6 @@ namespace Project.Weapons
             }
         }
         
-        protected abstract void Attack(bool useSpecial);
+        protected abstract void Attack(bool useSpecial, Vector3 shootDirection);
     }
 }
