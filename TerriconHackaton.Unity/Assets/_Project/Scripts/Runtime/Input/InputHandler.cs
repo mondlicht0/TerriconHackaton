@@ -9,6 +9,7 @@ namespace Project.Controls
         private Controls _controls;
         
         public bool FireTriggered { get; private set; }
+        public bool SpecialAttackTriggered { get; private set; }
         public Vector2 LookDirection { get; private set; }
 
         private void Awake()
@@ -27,9 +28,14 @@ namespace Project.Controls
             LookDirection = context.ReadValue<Vector2>();
         }
 
-        public void OnAttack(InputAction.CallbackContext context)
+        public void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            FireTriggered = context.ReadValueAsButton();
+            FireTriggered = context.started;
+        }
+        
+        public void OnSpecialAttackPerformed(InputAction.CallbackContext context)
+        {
+            SpecialAttackTriggered = context.performed;
         }
     }
 }

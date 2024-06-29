@@ -44,8 +44,8 @@ namespace Project.Controls
                     ""id"": ""dbb5661d-140e-4a11-b470-e7810dc2409d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""ChargedAttack"",
@@ -53,7 +53,7 @@ namespace Project.Controls
                     ""id"": ""94356bae-5476-4c36-8f38-46a2d3bc1891"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold,Press"",
                     ""initialStateCheck"": false
                 },
                 {
