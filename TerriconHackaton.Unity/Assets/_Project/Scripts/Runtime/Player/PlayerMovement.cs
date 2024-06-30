@@ -17,6 +17,8 @@ namespace Project.Player
         private Queue<Transform> _checkpointsQueue = new();
         private Player _player;
 
+        public event Action OnFinalCheckpoint;
+
         private void Awake()
         {
             foreach (Checkpoint checkpoint in _checkpoints)
@@ -34,13 +36,15 @@ namespace Project.Player
 
         private void MoveToNextCheckpoint()
         {
+            if (_checkpointsQueue.IsEmpty()) return;
             Transform checkpoint = _checkpointsQueue.Dequeue();
-            if (checkpoint != null)
+
+            transform.DOMove(checkpoint.position, _timeToMove);
+            _checkpointsDictionary[checkpoint].CheckpointReached();
+
+            if (checkpoint == _checkpointsQueue.Peek())
             {
-                transform.DOMove(checkpoint.position, _timeToMove).OnComplete((() =>
-                {
-                    _checkpointsDictionary[checkpoint].CheckpointReached();
-                }));   
+                OnFinalCheckpoint?.Invoke();
             }
         }
     }

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Project.Targets;
 using UnityEngine;
 using System;
+using Project.Weapons;
 
 namespace Project.Systems
 {
     public class Checkpoint : MonoBehaviour
     {
+        [field: SerializeField] public WeaponType WeaponType { get; private set; }
         [SerializeField] private List<FlyTarget> _amountOfEnemies;
-
         public event Action OnCheckpointComplete;
         public event Action OnCheckpointReached;
 
@@ -31,10 +31,9 @@ namespace Project.Systems
 
         private void CheckIsClear()
         {
-            Debug.Log(FindObjectsOfType<FlyTarget>(false).Length);
             if (FindObjectsOfType<FlyTarget>(false).Length == 0)
             {
-                Debug.Log("True");
+                Debug.Log("Check");
                 CompleteCheckPoint();
             }
         }
@@ -46,8 +45,8 @@ namespace Project.Systems
 
         public void CheckpointReached()
         {
-            ActivateEnemies();
             OnCheckpointReached?.Invoke();
+            ActivateEnemies();
         }
     }
 }

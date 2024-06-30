@@ -14,7 +14,8 @@ public class FlyTarget : MonoBehaviour, IDamagable
     private bool _isDead;
     
     public event Action<int> OnTargetHit; 
-    public event Action OnDead; 
+    public event Action OnDead;
+    public event Action OnPlayerAttacked;
 
     [Inject]
     private void Construct(Player player)
@@ -68,5 +69,13 @@ public class FlyTarget : MonoBehaviour, IDamagable
     {
         gameObject.SetActive(false);
         OnDead?.Invoke();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            OnPlayerAttacked?.Invoke();
+        }
     }
 }

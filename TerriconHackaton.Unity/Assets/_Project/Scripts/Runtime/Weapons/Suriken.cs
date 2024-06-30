@@ -21,6 +21,8 @@ namespace Project.Weapons
             {
                 rb.useGravity = false;
             }
+            
+            SpawnedModel.SetActive(false);
         }
 
         protected override void Attack(bool useSpecial, Vector3 shootDirection)

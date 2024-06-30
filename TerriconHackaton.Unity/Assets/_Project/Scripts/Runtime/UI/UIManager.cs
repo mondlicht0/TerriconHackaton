@@ -9,8 +9,9 @@ namespace Project.UI
     {
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private TextMeshProUGUI _scoreText;
-
+        [Header("Canvases")]
         [SerializeField] private Canvas _gameOverCanvas;
+        [SerializeField] private Canvas _winCanvas;
 
         private GameManager _gameManager;
         private Timer _timer;
@@ -27,6 +28,12 @@ namespace Project.UI
             _timer.OnTimerTick += UpdateTimerText;
             _gameManager.OnScoreUpdate += UpdateScoreText;
             _gameManager.OnGameOver += ShowGameOver;
+            _gameManager.OnWin += ShowWin;
+        }
+
+        private void ShowWin()
+        {
+            _winCanvas.gameObject.SetActive(true);
         }
 
         private void ShowGameOver()

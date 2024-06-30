@@ -16,6 +16,12 @@ namespace Project.Weapons
             SpawnedModel.transform.SetParent(parent);
             SpawnedModel.transform.localPosition = SpawnPoint;
             SpawnedModel.transform.eulerAngles = SpawnRotation;
+            SpawnedModel.SetActive(false);
+        }
+
+        public GameObject Spawn()
+        {
+            return SpawnedModel;
         }
 
         protected override void Attack(bool useSpecial, Vector3 shootDirection)

@@ -1,46 +1,30 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Project.Weapons
 {
-    public class ForceStaff : MonoBehaviour
+    [CreateAssetMenu(fileName = "Forcestaff", menuName = "Weapons/New Forcestaff", order = 0)]
+    public class ForceStaff : Weapon
     {
-        public GameObject projectilePrefab;
-        public Transform firePoint;
-        public float fireRate = 1f;     
-        private float nextFireTime = 0f;
+        [SerializeField] private float _projectileSpeed;
+        [SerializeField] private Projectile _projectilePrefab;
+        public Transform _firePoint;  
 
-        void Update()
+        public override void Spawn(Transform parent)
         {
-            if (Input.GetButtonDown("Fire1") && Time.time > nextFireTime)
-            {
-                nextFireTime = Time.time + 1f / fireRate;
-                Shoot();
-            }
+            LastShootTime = 0;
+            SpawnedModel = Instantiate(ModelPrefab);
+            SpawnedModel.transform.SetParent(parent);
+            SpawnedModel.transform.localPosition = SpawnPoint;
+            SpawnedModel.transform.eulerAngles = SpawnRotation;
+            _firePoint = SpawnedModel.transform.Find("FirePoint");
+            SpawnedModel.SetActive(false);
         }
 
-        void Shoot()
+        protected override void Attack(bool useSpecial, Vector3 shootDirection)
         {
-            StartCoroutine(AttackAnimation());
-            Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        }
-
-        private IEnumerator AttackAnimation()
-        {
-            Vector3 originalPosition = transform.position;
-            Vector3 attackPosition = transform.position + new Vector3(0, 0.2f, 0);
-        
-            float animationTime = 0.1f;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < animationTime)
-            {
-                transform.position = Vector3.Lerp(originalPosition, attackPosition, (elapsedTime / animationTime));
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            transform.position = originalPosition;
+            Projectile projectile = Instantiate(_projectilePrefab, _firePoint.position, _firePoint.rotation);
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            rb.velocity = shootDirection * _projectileSpeed;
         }
     }
 }

@@ -4,12 +4,13 @@ namespace Project.Weapons
 {
     public abstract class Weapon : ScriptableObject
     {
+        public WeaponType Type;
         public GameObject ModelPrefab;
         public float FireRate;
         public Vector3 SpawnPoint;
         public Vector3 SpawnRotation;
         
-        protected GameObject SpawnedModel;
+        public GameObject SpawnedModel { get; protected set; }
         protected float LastShootTime;
 
         public abstract void Spawn(Transform parent);
@@ -30,10 +31,17 @@ namespace Project.Weapons
         {
             if (isAttack || useSpecial)
             {
-                BaseAttack(useSpecial);
+                BaseAttack(true);
             }
         }
         
         protected abstract void Attack(bool useSpecial, Vector3 shootDirection);
+    }
+
+    public enum WeaponType
+    {
+        Bow,
+        Forcestaff,
+        Shuriken
     }
 }
