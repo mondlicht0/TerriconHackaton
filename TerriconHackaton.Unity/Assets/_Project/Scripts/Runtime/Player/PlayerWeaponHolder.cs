@@ -48,11 +48,6 @@ namespace Project.Player
         private void Start()
         {
             _checkpoints.AddRange(FindObjectsOfType<Checkpoint>());
-
-            foreach (Checkpoint checkpoint in _checkpoints)
-            {
-                checkpoint.OnCheckpointReached += () => ChangeWeapon(checkpoint.WeaponType);
-            }
         }
 
         private void Update()

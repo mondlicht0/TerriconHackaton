@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using ModestTree;
 using Project.Systems;
@@ -37,14 +38,15 @@ namespace Project.Player
         private void MoveToNextCheckpoint()
         {
             if (_checkpointsQueue.IsEmpty()) return;
+            Transform lastCheckpoint = _checkpointsQueue.ToArray().Last();
             Transform checkpoint = _checkpointsQueue.Dequeue();
 
             transform.DOMove(checkpoint.position, _timeToMove);
             _checkpointsDictionary[checkpoint].CheckpointReached();
 
-            if (checkpoint == _checkpointsQueue.Peek())
+            if (checkpoint == lastCheckpoint)
             {
-                OnFinalCheckpoint?.Invoke();
+                _checkpointsDictionary[checkpoint].OnCheckpointComplete += () => OnFinalCheckpoint?.Invoke();
             }
         }
     }

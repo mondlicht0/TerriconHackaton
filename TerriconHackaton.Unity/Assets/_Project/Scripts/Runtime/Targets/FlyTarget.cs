@@ -78,4 +78,12 @@ public class FlyTarget : MonoBehaviour, IDamagable
             OnPlayerAttacked?.Invoke();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            OnPlayerAttacked?.Invoke();
+        }
+    }
 }
