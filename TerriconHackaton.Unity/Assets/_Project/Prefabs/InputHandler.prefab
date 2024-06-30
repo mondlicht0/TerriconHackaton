@@ -123,6 +123,54 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5d768667-afb3-4a8b-acce-7b8d7a235ba1
     m_ActionName: PlayerMap/Aim[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6178837625290554695}
+        m_TargetAssemblyTypeName: Project.Controls.InputHandler, Project.Runtime
+        m_MethodName: OnFirstWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b8b37854-c30f-462a-bfa0-952c6d885052
+    m_ActionName: PlayerMap/FirstWeapon
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6178837625290554695}
+        m_TargetAssemblyTypeName: Project.Controls.InputHandler, Project.Runtime
+        m_MethodName: OnSecondWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da90823d-2e66-4e71-a7a0-6a6f2ff78794
+    m_ActionName: PlayerMap/SecondWeapon
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6178837625290554695}
+        m_TargetAssemblyTypeName: Project.Controls.InputHandler, Project.Runtime
+        m_MethodName: OnThirdWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ee360bf6-be9d-4b3b-8568-553de37ff950
+    m_ActionName: PlayerMap/New action1
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMap

@@ -64,6 +64,33 @@ namespace Project.Controls
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FirstWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8b37854-c30f-462a-bfa0-952c6d885052"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""da90823d-2e66-4e71-a7a0-6a6f2ff78794"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee360bf6-be9d-4b3b-8568-553de37ff950"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +137,39 @@ namespace Project.Controls
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c071620-3ea0-4c1f-b7bc-682313325af1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55eda5d8-f604-4e11-b9f4-0fbb25df77e0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2247d1bb-531a-46dc-8caf-a656c5b84869"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +182,9 @@ namespace Project.Controls
             m_PlayerMap_QuickAttack = m_PlayerMap.FindAction("QuickAttack", throwIfNotFound: true);
             m_PlayerMap_ChargedAttack = m_PlayerMap.FindAction("ChargedAttack", throwIfNotFound: true);
             m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
+            m_PlayerMap_FirstWeapon = m_PlayerMap.FindAction("FirstWeapon", throwIfNotFound: true);
+            m_PlayerMap_SecondWeapon = m_PlayerMap.FindAction("SecondWeapon", throwIfNotFound: true);
+            m_PlayerMap_ThirdWeapon = m_PlayerMap.FindAction("ThirdWeapon", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -187,6 +250,9 @@ namespace Project.Controls
         private readonly InputAction m_PlayerMap_QuickAttack;
         private readonly InputAction m_PlayerMap_ChargedAttack;
         private readonly InputAction m_PlayerMap_Aim;
+        private readonly InputAction m_PlayerMap_FirstWeapon;
+        private readonly InputAction m_PlayerMap_SecondWeapon;
+        private readonly InputAction m_PlayerMap_ThirdWeapon;
         public struct PlayerMapActions
         {
             private @Controls m_Wrapper;
@@ -195,6 +261,9 @@ namespace Project.Controls
             public InputAction @QuickAttack => m_Wrapper.m_PlayerMap_QuickAttack;
             public InputAction @ChargedAttack => m_Wrapper.m_PlayerMap_ChargedAttack;
             public InputAction @Aim => m_Wrapper.m_PlayerMap_Aim;
+            public InputAction @FirstWeapon => m_Wrapper.m_PlayerMap_FirstWeapon;
+            public InputAction @SecondWeapon => m_Wrapper.m_PlayerMap_SecondWeapon;
+            public InputAction @ThirdWeapon => m_Wrapper.m_PlayerMap_ThirdWeapon;
             public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -216,6 +285,15 @@ namespace Project.Controls
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @FirstWeapon.started += instance.OnFirstWeapon;
+                @FirstWeapon.performed += instance.OnFirstWeapon;
+                @FirstWeapon.canceled += instance.OnFirstWeapon;
+                @SecondWeapon.started += instance.OnSecondWeapon;
+                @SecondWeapon.performed += instance.OnSecondWeapon;
+                @SecondWeapon.canceled += instance.OnSecondWeapon;
+                @ThirdWeapon.started += instance.OnThirdWeapon;
+                @ThirdWeapon.performed += instance.OnThirdWeapon;
+                @ThirdWeapon.canceled += instance.OnThirdWeapon;
             }
 
             private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -232,6 +310,15 @@ namespace Project.Controls
                 @Aim.started -= instance.OnAim;
                 @Aim.performed -= instance.OnAim;
                 @Aim.canceled -= instance.OnAim;
+                @FirstWeapon.started -= instance.OnFirstWeapon;
+                @FirstWeapon.performed -= instance.OnFirstWeapon;
+                @FirstWeapon.canceled -= instance.OnFirstWeapon;
+                @SecondWeapon.started -= instance.OnSecondWeapon;
+                @SecondWeapon.performed -= instance.OnSecondWeapon;
+                @SecondWeapon.canceled -= instance.OnSecondWeapon;
+                @ThirdWeapon.started -= instance.OnThirdWeapon;
+                @ThirdWeapon.performed -= instance.OnThirdWeapon;
+                @ThirdWeapon.canceled -= instance.OnThirdWeapon;
             }
 
             public void RemoveCallbacks(IPlayerMapActions instance)
@@ -255,6 +342,9 @@ namespace Project.Controls
             void OnQuickAttack(InputAction.CallbackContext context);
             void OnChargedAttack(InputAction.CallbackContext context);
             void OnAim(InputAction.CallbackContext context);
+            void OnFirstWeapon(InputAction.CallbackContext context);
+            void OnSecondWeapon(InputAction.CallbackContext context);
+            void OnThirdWeapon(InputAction.CallbackContext context);
         }
     }
 }

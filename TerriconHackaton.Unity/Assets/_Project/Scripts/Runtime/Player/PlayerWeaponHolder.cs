@@ -61,6 +61,26 @@ namespace Project.Player
             {
                 _currentWeapon.Tick(_input.FireTriggered, _input.SpecialAttackTriggered);
             }
+            
+            CheckChangeWeapon();
+        }
+
+        private void CheckChangeWeapon()
+        {
+            if (_input.IsFirstWeapon)
+            {
+                ChangeWeapon(WeaponType.Bow);
+            }
+            
+            if (_input.IsSecondWeapon)
+            {
+                ChangeWeapon(WeaponType.Shuriken);
+            }
+            
+            if (_input.IsThirdWeapon)
+            {
+                ChangeWeapon(WeaponType.Forcestaff);
+            }
         }
 
         private void ChangeWeapon(WeaponType type)
