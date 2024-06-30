@@ -1,7 +1,9 @@
-﻿using Project.Systems;
+﻿using System;
+using Project.Systems;
 using TMPro;
 using UnityEngine;
 using Zenject;
+using UnityEngine.UI;
 
 namespace Project.UI
 {
@@ -12,15 +14,30 @@ namespace Project.UI
         [Header("Canvases")]
         [SerializeField] private Canvas _gameOverCanvas;
         [SerializeField] private Canvas _winCanvas;
+        [Header("Buttons")] 
+        [SerializeField] private Button _nextWinButton;
+        [SerializeField] private Button _retryOverButton;
+        [SerializeField] private Button _menuWinButton;
+        [SerializeField] private Button _menuOverButton;
 
+        private LevelManager _levelManager;
         private GameManager _gameManager;
         private Timer _timer;
 
         [Inject]
-        private void Construct(Timer timer, GameManager gameManager)
+        private void Construct(Timer timer, GameManager gameManager, LevelManager levelManager)
         {
+            _levelManager = levelManager;
             _gameManager = gameManager;
             _timer = timer;
+        }
+
+        private void InitButtons()
+        {
+            _nextWinButton.onClick.AddListener(_levelManager.NextLevelInvoke);
+            _menuWinButton.onClick.AddListener(_levelManager.MenuInvoke);
+            _retryOverButton.onClick.AddListener(_levelManager.RetryInvoke);
+            _menuOverButton.onClick.AddListener(_levelManager.MenuInvoke);
         }
 
         private void OnEnable()
@@ -29,6 +46,11 @@ namespace Project.UI
             _gameManager.OnScoreUpdate += UpdateScoreText;
             _gameManager.OnGameOver += ShowGameOver;
             _gameManager.OnWin += ShowWin;
+        }
+
+        private void Start()
+        {
+            InitButtons();
         }
 
         private void ShowWin()
