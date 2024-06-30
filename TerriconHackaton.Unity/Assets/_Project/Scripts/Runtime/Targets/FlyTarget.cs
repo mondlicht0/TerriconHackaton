@@ -46,7 +46,7 @@ public class FlyTarget : MonoBehaviour, IDamagable
         Vector3 direction = (_player.transform.position - transform.position).normalized;
         transform.position += direction * _moveSpeed * Time.deltaTime;
 
-        if (Vector3.Distance(_player.transform.position, transform.position) < 0.35f)
+        if (Vector3.Distance(_player.transform.position, transform.position) < 0.55f)
         {
             OnPlayerAttacked?.Invoke();
         }

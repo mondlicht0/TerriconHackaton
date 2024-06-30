@@ -1,6 +1,7 @@
 ﻿using System;
 using Cinemachine;
 using DG.Tweening;
+using Project.Controls;
 using Project.Player;
 using Project.Targets;
 using Project.UI;
@@ -14,6 +15,7 @@ namespace Project.Systems
         [SerializeField] private CinemachineInputProvider _inputProvider;
         [SerializeField] private UIManager _uiManager;
         [SerializeField] private Timer _timer;
+        private InputHandler _inputHandler;
 
         private Player.Player _player;
         private PlayerMovement _playerMovement;
@@ -25,8 +27,9 @@ namespace Project.Systems
         public event Action OnWin;
 
         [Inject]
-        private void Construct(Player.Player player)
+        private void Construct(Player.Player player, InputHandler inputHandler)
         {
+            _inputHandler = inputHandler;
             _player = player;
         }
 
@@ -57,6 +60,7 @@ namespace Project.Systems
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _inputProvider.enabled = false;
+            _inputHandler.gameObject.SetActive(false);
             OnWin?.Invoke();
         }
 
@@ -65,6 +69,7 @@ namespace Project.Systems
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _inputProvider.enabled = false;
+            _inputHandler.gameObject.SetActive(false);
             OnGameOver?.Invoke();
         }
 
