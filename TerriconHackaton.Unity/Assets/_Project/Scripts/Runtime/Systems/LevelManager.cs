@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using DG.Tweening;
 
 namespace Project.Systems
 {
@@ -41,16 +42,19 @@ namespace Project.Systems
 
         private void Retry()
         {
+            DOTween.KillAll();
             SceneManager.LoadSceneAsync(1);
         }
         
         private void Menu()
         {
+            DOTween.KillAll();
             SceneManager.LoadSceneAsync(0);
         }
         
         private void NextLevel()
         {
+            DOTween.KillAll();
             SceneManager.LoadSceneAsync(2);
         }
     }
