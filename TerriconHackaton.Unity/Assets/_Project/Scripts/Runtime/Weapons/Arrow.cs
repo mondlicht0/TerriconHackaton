@@ -35,5 +35,13 @@ namespace Project.Weapons
             _collider.enabled = false;
             transform.SetParent(other.transform);
         }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out IDamagable damagable))
+            {
+                damagable.GetDamage(Damage + 3);
+            }
+        }
     }
 }

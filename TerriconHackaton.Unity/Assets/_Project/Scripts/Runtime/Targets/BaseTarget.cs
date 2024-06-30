@@ -124,7 +124,7 @@ namespace Project.Targets
             }
         }
 
-        public void GetDamage()
+        public void GetDamage(int damage)
         {
             Die();
             OnTargetHit?.Invoke(_value);

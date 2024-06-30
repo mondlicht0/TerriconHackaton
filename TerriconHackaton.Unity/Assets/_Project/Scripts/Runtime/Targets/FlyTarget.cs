@@ -6,12 +6,15 @@ using Zenject;
 
 public class FlyTarget : MonoBehaviour, IDamagable
 {
+    [SerializeField] private int _maxHealth = 10;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _bobbingHeight = 1f;
     [SerializeField] private float _bobbingDuration = 1f;
     private int _value = 10;
     private Player _player;
     private bool _isDead;
+    
+    private int _currentHealth;
     
     public event Action<int> OnTargetHit; 
     public event Action OnDead;
@@ -25,6 +28,7 @@ public class FlyTarget : MonoBehaviour, IDamagable
 
     private void Start()
     {
+        _currentHealth = _maxHealth;
         Bobbing();
     }
 
@@ -48,10 +52,14 @@ public class FlyTarget : MonoBehaviour, IDamagable
         transform.DOMoveY(transform.position.y + _bobbingHeight, _bobbingDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
     }
     
-    public void GetDamage()
+    public void GetDamage(int amount)
     {
-        OnTargetHit?.Invoke(_value);
-        Die();
+        _currentHealth -= amount;
+        if (_currentHealth <= 0)
+        {
+            OnTargetHit?.Invoke(_value);
+            Die();   
+        }
     }
 
     public void Die()

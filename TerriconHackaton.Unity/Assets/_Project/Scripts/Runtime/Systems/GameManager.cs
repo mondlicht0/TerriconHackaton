@@ -52,6 +52,8 @@ namespace Project.Systems
 
         private void Win()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             OnWin?.Invoke();
         }
 

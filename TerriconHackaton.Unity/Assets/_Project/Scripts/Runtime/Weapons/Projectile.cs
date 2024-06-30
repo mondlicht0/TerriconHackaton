@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Project.Weapons
@@ -42,7 +41,7 @@ namespace Project.Weapons
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
-                damagable.GetDamage();
+                damagable.GetDamage(Damage + 5);
                 if (_bounces < _maxBounces)
                 {
                     _bounces++;
