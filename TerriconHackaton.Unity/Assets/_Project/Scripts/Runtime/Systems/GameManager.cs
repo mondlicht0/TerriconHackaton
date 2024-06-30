@@ -11,6 +11,7 @@ namespace Project.Systems
         [SerializeField] private Timer _timer;
         
         private BaseTarget _baseTarget;
+        private FlyTarget[] _flies;
         public int Score { get; private set; }
         public event Action OnScoreUpdate;
         public event Action OnGameOver;
@@ -18,6 +19,13 @@ namespace Project.Systems
         private void Start()
         {
             _baseTarget = FindFirstObjectByType<BaseTarget>();
+            _flies = FindObjectsOfType<FlyTarget>(true);
+
+            foreach (FlyTarget fly in _flies)
+            {
+                fly.OnTargetHit += UpdateScore;
+            }
+            
             _baseTarget.OnTargetHit += UpdateScore;
             _timer.OnTimerEnded += GameOver;
         }

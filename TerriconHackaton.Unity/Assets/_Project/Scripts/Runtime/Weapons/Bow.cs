@@ -9,7 +9,6 @@ namespace Project.Weapons
         [SerializeField] private float _shootForce;
         [SerializeField] private Vector3 _spawnOffset;
         
-        // 0.5 1.2 0.13
         public override void Spawn(Transform parent)
         {
             LastShootTime = 0;

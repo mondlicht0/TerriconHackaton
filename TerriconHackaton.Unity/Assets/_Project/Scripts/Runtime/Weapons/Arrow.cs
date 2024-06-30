@@ -10,6 +10,9 @@ namespace Project.Weapons
         private Collider _collider;
         private Quaternion _initialRotation;
 
+        private int _enemiesCount = 2;
+        private int _currentCount;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -18,22 +21,18 @@ namespace Project.Weapons
 
         private IEnumerator Start()
         {
-            yield return new WaitForSeconds(0.1f);
-            Quaternion rotation = transform.rotation;
+            yield return new WaitForSeconds(0.01f);
+            Quaternion currentRotation = transform.rotation;
             transform.parent = null;
-            transform.rotation = rotation;
-        }
-
-        private void Update()
-        {
-            transform.rotation = _initialRotation;
+            transform.rotation = currentRotation;
         }
 
         private void OnCollisionEnter(Collision other)
         {
+            if (_currentCount != _enemiesCount) return;
+            
             _rigidbody.isKinematic = true;
             _collider.enabled = false;
-        
             transform.SetParent(other.transform);
         }
     }
