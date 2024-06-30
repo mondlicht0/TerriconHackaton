@@ -1409,6 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60879f0ccb8d4624b07ab9c10e3bca42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputProvider: {fileID: 1795517081}
   _uiManager: {fileID: 1349365339}
   _timer: {fileID: 1198414253}
 --- !u!4 &62985051

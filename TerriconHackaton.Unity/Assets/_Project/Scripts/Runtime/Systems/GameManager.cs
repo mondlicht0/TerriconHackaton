@@ -1,4 +1,5 @@
 ﻿using System;
+using Cinemachine;
 using DG.Tweening;
 using Project.Player;
 using Project.Targets;
@@ -10,6 +11,7 @@ namespace Project.Systems
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private CinemachineInputProvider _inputProvider;
         [SerializeField] private UIManager _uiManager;
         [SerializeField] private Timer _timer;
 
@@ -54,6 +56,7 @@ namespace Project.Systems
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            _inputProvider.enabled = false;
             OnWin?.Invoke();
         }
 
@@ -61,6 +64,7 @@ namespace Project.Systems
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            _inputProvider.enabled = false;
             OnGameOver?.Invoke();
         }
 
